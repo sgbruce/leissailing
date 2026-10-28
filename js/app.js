@@ -237,18 +237,8 @@ function layout(inner) {
     </div>`;
 }
 
-// A white flag on a staff with a red pennant: this site's logo.
-const logo = () => `<svg class="logo" viewBox="0 0 145 92" width="145" height="92" aria-hidden="true">
-  <defs><linearGradient id="lg-cloth" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e7e7e7"/></linearGradient></defs>
-  <g transform="rotate(-12 40 50)">
-    <rect x="30" y="8" width="4" height="84" rx="1.5" fill="#8a8a8a"/>
-    <path d="M34 12 C60 8 80 16 104 12 L104 52 C80 56 60 48 34 52 Z" fill="url(#lg-cloth)" stroke="#bbb"/>
-    <path d="M104 12 L140 30 L104 46 Z" fill="#c8312b"/>
-    <path d="M78 13.5 C88 14.5 96 13 104 12 L104 52 C96 53 88 54.5 78 53.5 Z" fill="#c8312b"/>
-    <circle cx="56" cy="32" r="12" fill="none" stroke="#1d3f73" stroke-width="5"/>
-    <text x="56" y="38" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="bold" fill="#1d3f73">${esc(SITE_NAME.charAt(0).toUpperCase())}</text>
-  </g>
-</svg>`;
+// The club burgee: this site's logo.
+const logo = () => `<img class="logo" src="img/logo.png" width="150" height="86" alt="">`;
 
 // Techscore's boxed page title with the ring-and-rule ornaments either side,
 // and a key/value list under it.

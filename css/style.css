@@ -67,7 +67,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .92em; 
 #menu a[aria-current="page"] { color: #888; }
 li#logo { width: 5em; border-right: none; }
 li#logo a { display: block; }
-li#logo .logo { position: absolute; top: .5em; margin-left: -50px; width: 145px; height: 92px; }
+li#logo .logo { position: absolute; top: .5em; margin-left: -50px; width: 150px; height: auto; }
 
 /* ---------- page ---------- */
 
@@ -255,7 +255,7 @@ address { border-top: 1px solid #888; max-width: 74em; margin: 0 auto; padding-t
   #page-footer h3, address { text-align: center; }
 
   /* Header: logo top left beside the account line, menu centred under both. */
-  #top-wrapper { padding: .5em 16px .5em 84px; min-height: 64px; }
+  #top-wrapper { padding: .5em 16px .5em 98px; min-height: 64px; }
   #last_updated { display: none; }
   #social { flex: 0 1 auto; }
   #account { margin-left: auto; }
@@ -264,7 +264,7 @@ address { border-top: 1px solid #888; max-width: 74em; margin: 0 auto; padding-t
   #menu li { display: inline-block; padding: 0; border: none; font-size: .72em; }
   #menu li a { display: block; padding: .9ex 1.2ex; }
   li#logo { position: absolute; left: 12px; top: 6px; width: auto; padding: 0; }
-  li#logo .logo { position: static; margin: 0; width: 64px; height: auto; }
+  li#logo .logo { position: static; margin: 0; width: 72px; height: auto; }
 
   #page-content { padding-top: 2em; }
   .port { min-width: 0; max-width: none; display: block; margin: 0 16px; padding: 0; }
