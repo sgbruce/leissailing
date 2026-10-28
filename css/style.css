@@ -1,223 +1,319 @@
-/* Results-sheet styling: navy header band, compact tables, high-contrast win/loss marks. */
+/* Modelled on Techscore (scores.collegesailing.org): white header with a centred
+   logo in the menu, tan blocks with boxed small-caps titles, beige table heads,
+   green/peach win-loss cells, and a grey footer. */
 
 :root {
-  --navy: #0e2a47;
-  --navy-2: #173e66;
-  --blue: #1f5c99;
-  --link: #1a5794;
-  --bg: #e8ecf1;
-  --panel: #ffffff;
-  --line: #c9d2dc;
-  --line-soft: #e1e6ec;
-  --row-alt: #f3f6f9;
-  --ink: #1b2430;
-  --muted: #5d6b7b;
-
-  --win-bg: #d5ecd4;
-  --win-ink: #145c22;
-  --win-chip: #2e7d32;
-  --loss-bg: #f7d9d7;
-  --loss-ink: #8e1b16;
-  --loss-chip: #c62828;
-  --split-bg: #fbefc9;
-  --pending-bg: #eef1f4;
-  --pending-ink: #5d6b7b;
-  --self: #2a313b;
-
-  --radius: 3px;
-  font-size: 14px;
+  --tan: #f2ede6;
+  --tan-2: #f3ebe0;
+  --tan-head: #e6e0d3;
+  --rule: #bbb;
+  --soft: #ddd;
+  --link: #3465a4;
+  --title: #48484a;
+  --muted: #555;
+  --footer: #6c6d6f;
+  --win: #e0f3e0;
+  --lose: #eed2c0;
+  --tie: #f3f3bb;
+  --ns: #ccc;
+  --serif-ish: "Lucida Grande", Tahoma, Verdana, sans-serif;
+  --label: Arial, Helvetica, sans-serif;
 }
 
 * { box-sizing: border-box; }
-
+html { height: 100%; }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 1.45;
+  background: var(--footer);
+  color: #000;
+  font-family: var(--serif-ish);
+  line-height: 1.25em;
   -webkit-text-size-adjust: 100%;
 }
-
 a { color: var(--link); }
-a:hover { color: var(--navy); }
-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .92em; background: var(--row-alt); padding: 1px 4px; border-radius: 2px; }
+code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .92em; }
+.boot { padding: 40px 16px; text-align: center; color: #888; background: #fff; margin: 0; }
+.muted { color: #888; }
+.center { text-align: center; }
+.noshow { font-style: italic; }
+.hint { color: var(--muted); font-size: .85em; margin: .75em 0 0; }
 
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
-.boot { padding: 40px 16px; text-align: center; color: var(--muted); }
+#app { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ---------- header / footer ---------- */
+/* ---------- header ---------- */
 
-.site-header {
-  background: var(--navy);
-  border-bottom: 4px solid var(--blue);
-  color: #fff;
+#page-header { background: #fff; position: relative; }
+#top-wrapper { display: flex; align-items: center; gap: 1em; max-width: 60em; margin: 0 auto; padding: 0 1em; min-height: 3.25em; }
+#last_updated { font-family: sans-serif; font-size: .8em; color: #888; white-space: nowrap; }
+#social { flex: 1; }
+#account { font-family: sans-serif; font-size: .8em; color: #555; text-align: right; }
+#account a { color: #555; }
+#account .handle { color: #999; }
+.badge { display: inline-block; background: #c8312b; color: #fff; font-size: .8em; font-weight: bold; text-transform: uppercase; letter-spacing: .05em; padding: 0 .4em; border-radius: 2px; }
+.demo-flag { font-family: sans-serif; font-size: .75em; color: #8a6d00; background: var(--tie); border: 1px solid #d9c96a; border-radius: 3px; padding: .1em .5em; white-space: nowrap; }
+.demo-flag a { color: #8a6d00; }
+
+#menu-wrapper { border-top: 1px solid var(--soft); border-bottom: 1px solid var(--soft); }
+#menu { max-width: 60em; min-width: 35em; width: 100%; margin: 0 auto; padding: .5em 0; list-style: none; display: table; }
+#menu li {
+  display: table-cell; vertical-align: middle; text-align: center;
+  padding: 0 2em; min-width: 6em; border-right: 1px solid var(--soft);
+  font-family: var(--label); text-transform: uppercase; font-size: .7em; letter-spacing: .12em;
+  font-stretch: condensed; font-weight: bold; line-height: 1.25rem;
 }
-.head-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; flex-wrap: wrap; }
-.brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 700; font-size: 1.25rem; letter-spacing: .01em; }
-.brand:hover { color: #fff; }
-.burgee { width: 28px; height: 20px; fill: #fff; }
-.burgee path { fill: #e0b23a; }
-.top-nav { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: .95rem; }
-.top-nav a, .linklike { color: #dbe7f3; text-decoration: none; }
-.top-nav a:hover, .linklike:hover { color: #fff; text-decoration: underline; }
-.who { color: #fff; }
-.who .handle { color: #9fb6cc; }
-.linklike { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
-.badge { display: inline-block; background: #e0b23a; color: var(--navy); font-size: .72rem; font-weight: 700; text-transform: uppercase; padding: 1px 6px; border-radius: 2px; vertical-align: 1px; }
+#menu li:last-child { border-right: none; }
+#menu a { color: #222; text-decoration: none; }
+#menu a:hover { color: #888; }
+#menu a[aria-current="page"] { color: #888; }
+li#logo { width: 5em; border-right: none; }
+li#logo a { display: block; }
+li#logo .logo { position: absolute; top: .5em; margin-left: -50px; width: 145px; height: 92px; }
 
-main.wrap { padding-top: 20px; padding-bottom: 40px; }
+/* ---------- page ---------- */
 
-.site-footer { color: var(--muted); font-size: .85rem; padding: 18px 0 30px; border-top: 1px solid var(--line); }
+#page-content { flex: 1; background: #fff; padding: 3.5em 0 2em; }
+.flash-wrap { max-width: 50em; margin: -2em auto 2.5em; padding: 0 1ex; }
 
-/* ---------- headings, text ---------- */
-
-.page-title { font-size: 1.5rem; margin: 0 0 14px; color: var(--navy); }
-h2 { font-size: 1.05rem; margin: 0 0 10px; color: var(--navy); }
-.section-title { margin-top: 22px; padding-bottom: 4px; border-bottom: 2px solid var(--navy); }
-.muted { color: var(--muted); }
-.hint { color: var(--muted); font-size: .88rem; margin: 10px 0 0; }
-.note { background: #fff; border-left: 4px solid var(--blue); padding: 8px 12px; margin: 0 0 14px; }
-.nowrap { white-space: nowrap; }
-.handle { color: var(--muted); font-size: .9em; }
-
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin: 18px 0; }
-.panel.callout { border-color: #e0b23a; border-left-width: 4px; }
-.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-.two-col .panel { margin: 0; }
-
-.flash { padding: 10px 14px; border-radius: var(--radius); margin: 0 0 14px; border: 1px solid; }
-.flash.ok { background: var(--win-bg); color: var(--win-ink); border-color: #a9d3a7; }
-.flash.error { background: var(--loss-bg); color: var(--loss-ink); border-color: #e7aca8; }
-
-/* ---------- public homepage ---------- */
-
-.hero { background: var(--panel); border: 1px solid var(--line); border-top: 4px solid var(--navy); border-radius: var(--radius); padding: 32px 24px; }
-.hero h1 { margin: 0 0 10px; font-size: 2rem; color: var(--navy); }
-.lede { font-size: 1.1rem; max-width: 40em; margin: 0 0 20px; }
-.cta { display: flex; flex-wrap: wrap; gap: 10px; }
-.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px; }
-.features .panel { margin: 0; }
-.features p { margin: 0; color: var(--muted); }
-
-a.button { display: inline-block; background: var(--blue); color: #fff; border: 1px solid var(--blue); border-radius: var(--radius); padding: 8px 18px; font-weight: 600; text-decoration: none; }
-a.button:hover { background: var(--navy-2); border-color: var(--navy-2); color: #fff; }
-a.button.ghost { background: #fff; color: var(--blue); }
-a.button.ghost:hover { background: var(--row-alt); color: var(--navy); }
-
-/* ---------- regatta header + tabs ---------- */
-
-.regatta-head { background: var(--panel); border: 1px solid var(--line); border-bottom: 0; padding: 16px 16px 12px; border-radius: var(--radius) var(--radius) 0 0; }
-.regatta-head h1 { margin: 0 0 10px; font-size: 1.6rem; color: var(--navy); }
-.details { border-collapse: collapse; font-size: .95rem; }
-.details th { text-align: left; font-weight: 600; color: var(--muted); padding: 2px 18px 2px 0; white-space: nowrap; vertical-align: top; }
-.details td { padding: 2px 0; }
-
-.tabs { display: flex; flex-wrap: wrap; background: var(--navy-2); border: 1px solid var(--navy-2); }
-.tabs a { color: #dbe7f3; text-decoration: none; padding: 9px 16px; font-weight: 600; font-size: .95rem; border-right: 1px solid rgba(255,255,255,.12); }
-.tabs a:hover { background: var(--blue); color: #fff; }
-.tabs a.active { background: var(--panel); color: var(--navy); }
-
-.tab-body { background: var(--panel); border: 1px solid var(--line); border-top: 0; padding: 16px; border-radius: 0 0 var(--radius) var(--radius); }
-.tab-body .panel { background: var(--row-alt); }
-
-/* ---------- data tables ---------- */
-
-.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-table.data { border-collapse: collapse; width: 100%; background: var(--panel); border: 1px solid var(--line); }
-table.data th { background: var(--navy-2); color: #fff; text-align: left; font-weight: 600; padding: 7px 10px; font-size: .9rem; white-space: nowrap; }
-table.data td { padding: 6px 10px; border-top: 1px solid var(--line-soft); vertical-align: middle; }
-table.data tbody tr:nth-child(even) td { background: var(--row-alt); }
-table.data .num { text-align: right; font-variant-numeric: tabular-nums; }
-table.races td.won { font-weight: 700; color: var(--win-ink); }
-table.races td.lost { color: var(--muted); }
-table.rankings tbody tr:first-child td { font-weight: 700; }
-
-.sh { display: inline-block; min-width: 3.2em; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
-
-/* ---------- the round-robin grid ---------- */
-
-table.tr-grid { border-collapse: collapse; background: var(--panel); font-variant-numeric: tabular-nums; }
-.tr-grid th, .tr-grid td { border: 1px solid var(--line); }
-.tr-grid thead th { background: var(--navy-2); color: #fff; font-weight: 700; padding: 7px 6px; font-size: .85rem; text-align: center; white-space: nowrap; }
-.tr-grid thead th.corner { text-align: left; padding-left: 10px; }
-.tr-grid th.row { background: var(--row-alt); text-align: left; font-weight: 400; padding: 6px 10px; white-space: nowrap; min-width: 200px; }
-.tr-grid th.row .rk { display: inline-block; width: 1.6em; color: var(--muted); font-weight: 700; }
-.tr-grid th.row .sh { min-width: 3.4em; }
-.tr-grid th.row .nm { color: var(--ink); }
-.tr-grid td { min-width: 64px; height: 38px; padding: 3px; text-align: center; vertical-align: middle; }
-.tr-grid td.self { background: var(--self); background-image: repeating-linear-gradient(135deg, transparent 0 6px, rgba(255,255,255,.06) 6px 12px); }
-.tr-grid td.c-win { background: var(--win-bg); }
-.tr-grid td.c-loss { background: var(--loss-bg); }
-.tr-grid td.c-split { background: var(--split-bg); }
-.tr-grid td.c-pending { background: var(--pending-bg); }
-.tr-grid td.rec { background: var(--row-alt); font-size: 1rem; padding: 3px 10px; min-width: 56px; }
-.tr-grid thead th.rec { background: var(--navy); }
-
-.chip {
-  display: inline-flex; align-items: baseline; gap: 1px;
-  margin: 2px; padding: 1px 5px 1px 4px;
-  border-radius: 2px; font-size: .8rem; line-height: 1.35; white-space: nowrap;
-  color: #fff; cursor: default;
+h1 {
+  display: table; width: auto; margin: 0 auto; padding: .5em; border-spacing: 0;
+  font-family: var(--label); font-weight: bold; letter-spacing: .1em; font-variant: small-caps;
+  color: var(--title); text-align: center; background: #f7f7f7; border: 1px solid var(--soft);
+  border-radius: .25em; font-size: 160%; line-height: 1.25rem; position: relative; top: -.75em;
 }
-.chip b { font-size: .92rem; margin-right: 1px; }
-.chip.win { background: var(--win-chip); }
-.chip.loss { background: var(--loss-chip); }
-.chip.pending { background: #fff; color: var(--pending-ink); border: 1px dashed #9aa7b5; padding: 0 5px; }
+h1 > span { display: table-cell; vertical-align: middle; }
+.left-fill, .right-fill { width: 90px; height: 15px; background-repeat: no-repeat; background-position: center; }
+.left-fill { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='15'%3E%3Ccircle cx='7.5' cy='7.5' r='3.5' fill='%23fff' stroke='%23999' stroke-width='1.2'/%3E%3Ccircle cx='7.5' cy='7.5' r='1.3' fill='%23ccc'/%3E%3Cpath d='M14 7.5H72' stroke='%23bbb' stroke-width='1'/%3E%3C/svg%3E"); }
+.right-fill { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='15'%3E%3Cpath d='M8 7.5H66' stroke='%23bbb' stroke-width='1'/%3E%3Ccircle cx='72.5' cy='7.5' r='3.5' fill='%23fff' stroke='%23999' stroke-width='1.2'/%3E%3Ccircle cx='72.5' cy='7.5' r='1.3' fill='%23ccc'/%3E%3C/svg%3E"); }
 
-.legend { margin: 12px 0 0; color: var(--muted); font-size: .88rem; line-height: 2; }
-.legend .chip { margin: 0 3px 0 8px; }
-.legend .chip:first-child { margin-left: 0; }
-.legend-sep { margin: 0 6px; }
+/* The tan header block under every page title. */
+#content-header { background: var(--tan); border: 1px solid var(--soft); margin: 0 auto 1em; text-align: center; max-width: 50em; }
+#page-info { font-size: .9em; color: var(--muted); margin: -1em 0 .5em; width: 100%; border-collapse: collapse; padding: 0; list-style: none; display: table; }
+#page-info li { display: table-row; border-bottom: 1px solid var(--soft); }
+#page-info li:last-child { border-bottom: none; }
+.page-info-key { display: table-cell; line-height: 2em; padding: 0 1%; text-align: right; width: 45%; }
+.page-info-value { display: table-cell; font-weight: bold; padding: .25em; text-align: left; line-height: 1.5em; vertical-align: middle; }
 
-/* ---------- forms ---------- */
+.port { min-width: 50em; max-width: 100%; display: table; margin: auto; padding: 0 1ex; position: relative; }
+.port p { max-width: 50em; }
+.port + .port { margin-top: .5em; }
+.port.wide { max-width: 95vw; }
+.port.full { display: block; min-width: 0; max-width: none; padding: 0 1ex; }
 
-label { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; font-weight: 600; color: var(--muted); }
-input, select, button { font: inherit; }
+/* ---------- tables ---------- */
+
+table { border-spacing: 0; border-collapse: collapse; font-size: .9em; margin: 1em auto; }
+table td { border: 1px solid var(--rule); text-align: right; margin: 0; padding: .25em; }
+table th { border: 1px solid var(--rule); text-align: right; min-width: 2.25em; padding: 0 .25em; font-size: 90%; }
+table thead { background: #eae5d6 linear-gradient(#f6f1e8, #e6dfcf); border: 1px solid var(--rule); height: 20px; color: #000; }
+table tbody { border: 1px solid var(--rule); }
+.row1 { background: var(--tan); }
+td.teamname, th.teamname { text-align: left; }
+td.races { text-align: left; font-size: 95%; color: var(--muted); padding-left: .5em; }
+
+.burgee-img { display: block; }
+.burgee-cell .burgee-img { height: 40px; width: auto; }
+td.burgee-cell { text-align: center; }
+
+/* Results with sailors (report, sailors, ranking summary). */
+table.results tbody *, table.sailors tbody * { border: none; }
+table.results th { text-align: right; }
+table.results th.teamname, table.sailors th.teamname { text-align: left; }
+table.results td, table.sailors td { padding: .25em .5em; }
+tr.topborder td { border-top: 1px solid var(--rule) !important; }
+.teamranking .sailor, .sailors .sailor-name, .sailors .handle-cell { text-align: left; padding: 0 1em; }
+.sailors .handle-cell { color: #888; }
+.teamranking td.tiebreaker { color: var(--muted); }
+.teamranking td.pending { color: #888; }
+.tiebreaker th, .tiebreaker td { border: none; text-align: left; }
+.tiebreaker thead { background: none; border: none; }
+.tiebreaker tbody { border: none; }
+
+/* Home page regatta lists and season tables. */
+.season-summary, .participation-table { width: 100%; }
+.season-summary tbody, .participation-table tbody { border: none; }
+.season-summary th { text-align: left; }
+.season-summary td { text-align: left; border: none; padding: .5em; }
+.season-summary tbody th { text-align: center; padding: .5em; background: var(--tan-head); }
+.season-summary .burgee-img { height: 40px; width: auto; }
+
+.coming-regattas { background: var(--tan); border: 1px solid #aaa; border-radius: .5em; }
+.coming-regattas thead { display: none; }
+.coming-regattas * { border: none; padding: .5em; text-align: left; }
+.coming-regattas tr td:first-child { text-align: right; }
+
+/* ---------- home ---------- */
+
+#message-container { display: table; max-width: 65em; margin: 0 auto; border-spacing: 1em; }
+#welcome, #in-progress { display: table-cell; vertical-align: top; text-align: left; background: var(--tan); border: 1px solid var(--soft); padding: 0 1em; width: 40%; }
+#in-progress { width: 60%; }
+#message-container p { margin-top: 0; margin-bottom: 1em; }
+#in-progress table { width: auto; margin-top: -1em; }
+#in-progress thead { display: none; }
+#in-progress td { border-bottom: 1px dotted #aaa; }
+#in-progress tr:last-child td { border-bottom: none; }
+#in-progress tr td:first-child { text-align: right; }
+#in-progress .row1 { background: none; }
+.signin-callout { text-align: center; padding: 0 1em 1em; }
+.signin-callout .actions { margin: 1.5em 0 .5em; }
+
+#message-container.login { width: 100%; max-width: 60em; }
+#message-container.login #welcome, #message-container.login #in-progress { width: 50%; }
+
+/* Other seasons strip. */
+#submenu-wrapper { border-top: 1px solid var(--soft); border-bottom: 1px solid var(--soft); padding: .5em 0; margin-top: 2em; }
+#other-seasons { list-style: none; display: block; max-width: 60em; margin: 0 auto; padding: 0; text-align: center; }
+#other-seasons li { display: inline-block; vertical-align: middle; text-align: center; border-right: 1px solid var(--soft); padding: 1em; width: 8em; font-family: var(--label); font-size: .7em; letter-spacing: .1em; text-transform: uppercase; font-weight: bold; }
+#other-seasons li:last-child { border-right: none; }
+#other-seasons a { color: #222; text-decoration: none; }
+#other-seasons a:hover { color: #888; }
+
+/* ---------- team racing grid (full scores) ---------- */
+
+.chart-container { display: block; max-width: 95vw; overflow: auto; overflow-y: hidden; }
+.teamscores, .teamscores tbody { border: none; }
+.teamscores td { text-align: center; vertical-align: middle; }
+.teamscores th.tr-vert-label { height: 12em; width: 5.5em; min-width: 5.5em; vertical-align: bottom; text-align: center; padding: .5em .25em; }
+.tr-vert-label span { display: inline-block; writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; max-height: 11em; overflow: hidden; }
+.tr-horiz-label { height: 5em; width: 12em; text-align: right; vertical-align: middle; padding: 0 .5em !important; }
+.tr-rec-th, .tr-pivot { vertical-align: bottom; border-left: none !important; border-top: none !important; }
+.tr-pivot { color: #fff; border-right: none !important; }
+.tr-record { white-space: nowrap; }
+.tr-ns { background: var(--ns); color: var(--ns); }
+.tr-win { background: var(--win); font-weight: bold; }
+.tr-lose { background: var(--lose); color: var(--muted); }
+.tr-tie { background: var(--tie); }
+.tr-pending { background: #fff; color: #999; font-style: italic; }
+.tr-empty { background: #fff; }
+td.tr-multcell { padding: 0; height: 100%; }
+.tr-multtable { border: none; width: 100%; height: 100%; margin: 0; font-size: 100%; }
+.tr-multtable tbody { border: none; }
+.tr-multtable td { border: none; text-align: center; }
+.tr-multtable tr + tr td { border-top: 1px dashed #aaa; }
+.legend { font-size: .8em; color: var(--muted); text-align: center; max-width: 60em !important; margin: 0 auto 1em; line-height: 1.8em; }
+.legend .key { display: inline-block; padding: 0 .4em; margin: 0 .2em 0 .8em; border: 1px solid var(--rule); }
+
+/* ---------- all races ---------- */
+
+.teamscorelist th, .scoring-table th { text-align: center; }
+.teamscorelist .burgee-img, .scoring-table .burgee-img { height: 20px; width: auto; }
+.roundrow th { padding: .5em 0; }
+.vscell { text-align: center !important; }
+.team1 { text-align: right; }
+.team2 { text-align: left; }
+#team-filter-wrap { margin: .25em auto; text-align: center; font-size: .9em; }
+#team-filter-wrap label { display: block; margin-bottom: .25em; }
+#team-filter-wrap select { width: auto; min-width: 16em; }
+.teamscorelist, table.teamranking, table.sailors, .scoring-table { width: 100%; }
+
+/* ---------- scoring ---------- */
+
+.scoring-table td.btns { white-space: nowrap; text-align: left; }
+.scoring-table .tr-sailed-row td:not(.btns) { opacity: .75; }
+
+.form-box { background: var(--tan); border: 1px solid #aaa; border-radius: .5em; padding: .75em 1em; margin: 1em 0; }
+.form-box.plain { background: none; border: none; padding: 0; margin: 0 0 1em; }
+.field { display: grid; grid-template-columns: 40% 1fr; gap: .5em 1em; align-items: center; padding: .3em 0; }
+.field > label { text-align: right; font-size: .9em; color: var(--muted); }
+.field .pair { display: flex; gap: .5em; }
+.field .pair input { flex: 1; min-width: 0; }
 input, select {
-  border: 1px solid #aab6c3; border-radius: var(--radius); padding: 7px 9px; background: #fff; color: var(--ink);
-  font-weight: 400; font-size: .95rem; min-width: 0;
+  font: inherit; font-size: .9em; padding: .2em .35em; border: 1px solid #aaa; border-radius: 2px; background: #fff;
+  max-width: 100%; width: 100%;
 }
-input:focus, select:focus { outline: 2px solid var(--blue); outline-offset: 0; border-color: var(--blue); }
+input.narrow { width: 6em; }
+input:focus, select:focus { outline: 2px solid #9fbbe0; outline-offset: 0; }
 
-.form-stack { display: grid; gap: 12px; }
-.form-grid { display: flex; flex-wrap: wrap; gap: 12px 14px; align-items: flex-end; }
-.form-grid label { flex: 1 1 160px; }
-.form-grid label.narrow { flex: 0 1 90px; }
-.form-grid label.wide { flex: 2 1 260px; }
-.form-grid .vs { align-self: center; padding-top: 18px; color: var(--muted); font-weight: 700; }
-.form-grid .actions { flex-basis: 100%; }
-fieldset { flex: 1 1 260px; border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 12px 12px; margin: 0; display: flex; gap: 10px; flex-wrap: wrap; background: #fff; }
-fieldset label { flex: 1 1 120px; }
-legend { font-weight: 700; color: var(--navy); padding: 0 4px; font-size: .9rem; }
-
-button {
-  background: var(--blue); color: #fff; border: 1px solid var(--blue); border-radius: var(--radius);
-  padding: 7px 16px; font-weight: 600; cursor: pointer;
+/* Bevelled buttons, after Techscore's rank filter. */
+button, a.button {
+  font-family: var(--label); font-size: .8em; font-weight: bold; letter-spacing: .05em; text-transform: uppercase;
+  color: #222; background: linear-gradient(#e2e2e2, #c4c4c4); cursor: pointer; text-decoration: none; display: inline-block;
+  border: 1px solid #aaa; border-top-color: #eee; border-bottom-color: #555; border-radius: 2px; padding: .35em 1em;
 }
-button:hover { background: var(--navy-2); border-color: var(--navy-2); }
-button:disabled { opacity: .55; cursor: default; }
-button.small { padding: 3px 8px; font-size: .8rem; margin: 1px 2px; }
-button.small.on { background: var(--win-chip); border-color: var(--win-chip); opacity: 1; }
-button.ghost { background: #fff; color: var(--muted); border-color: #aab6c3; }
-button.ghost:hover { color: var(--ink); background: var(--row-alt); }
-button.danger { background: #fff; color: var(--loss-chip); border-color: #e3a19d; }
-button.danger:hover { background: var(--loss-bg); }
+button:hover, a.button:hover { background: linear-gradient(#ececec, #d0d0d0); color: #222; }
+button:active, button.on { background: #aaa; border-color: #ccc; border-top-color: #888; border-bottom-color: #eee; }
+button:disabled { cursor: default; color: #555; }
+button.small { font-size: .7em; padding: .2em .6em; margin: 0 .15em; }
+button.danger { color: #8e1b16; }
 
-ul.plain { list-style: none; margin: 0; padding: 0; }
-ul.plain li { padding: 6px 0; border-top: 1px solid var(--line-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-ul.plain li:first-child { border-top: 0; }
-ul.plain .btns { margin-left: auto; }
+/* Messages. */
+.notice { border: 1px solid orange; background: var(--tie); padding: 1ex; }
+div.message, p.message { background: var(--tan-2); border: 1px solid var(--link); padding: 1em; }
+.flash { margin: 0; }
 
-/* ---------- small screens ---------- */
+/* ---------- footer ---------- */
 
-@media (max-width: 640px) {
-  :root { font-size: 13px; }
-  .regatta-head h1 { font-size: 1.35rem; }
-  .tabs a { padding: 8px 12px; }
-  .tab-body { padding: 12px; }
-  .tr-grid th.row { min-width: 0; }
-  .tr-grid th.row .nm { display: none; }
-  .tr-grid td { min-width: 52px; }
+#page-footer { padding: 1em 1em 0; min-height: 12em; color: #ccc; }
+#page-footer h3 { max-width: 74em; margin: .5em auto; font-size: .7em; color: #fff; text-transform: uppercase; letter-spacing: .1em; font-family: var(--label); }
+address { border-top: 1px solid #888; max-width: 74em; margin: 0 auto; padding-top: .25em; color: #ccc; font-size: .8em; font-style: normal; text-align: right; }
+
+/* ---------- narrow screens ---------- */
+
+@media screen and (max-width: 799px) {
+  body { background: #fff; font-size: 15px; }
+  a { text-decoration: none; }
+  #page-footer { background: var(--footer); min-height: 0; padding-bottom: 1em; }
+  #page-footer h3, address { text-align: center; }
+
+  /* Header: logo top left beside the account line, menu centred under both. */
+  #top-wrapper { padding: .5em 16px .5em 84px; min-height: 64px; }
+  #last_updated { display: none; }
+  #social { flex: 0 1 auto; }
+  #account { margin-left: auto; }
+  #menu-wrapper { border-top: 1px solid var(--soft); border-bottom: 1px solid var(--soft); }
+  #menu { display: block; min-width: 0; max-width: none; padding: .25em 8px; text-align: center; }
+  #menu li { display: inline-block; padding: 0; border: none; font-size: .72em; }
+  #menu li a { display: block; padding: .9ex 1.2ex; }
+  li#logo { position: absolute; left: 12px; top: 6px; width: auto; padding: 0; }
+  li#logo .logo { position: static; margin: 0; width: 64px; height: auto; }
+
+  #page-content { padding-top: 2em; }
+  .port { min-width: 0; max-width: none; display: block; margin: 0 16px; padding: 0; }
+  .port.wide, .port.full { max-width: none; padding: 0; }
+  .port p { max-width: none; }
+  #content-header { margin: 0 16px 1em; }
+  #content-header h1 { font-size: 130%; }
+  #page-info { font-size: 80%; }
+  .flash-wrap { margin: -1em 16px 2em; padding: 0; }
+
+  #message-container, #message-container.login { display: block; width: auto; padding: 0 16px; }
+  #welcome, #in-progress, #message-container.login #welcome, #message-container.login #in-progress { display: block; width: auto; margin: 0 0 2.5em; }
+  #welcome { font-size: 90%; }
+
+  /* Event lists become centred cards: name, then the details on one line. */
+  .season-summary, #in-progress table { display: block; width: 100%; margin: 0 0 1em; }
+  .season-summary thead { display: none; }
+  .season-summary tbody { display: block; }
+  .season-summary tr { display: block; text-align: center; padding: .5em 0; border-bottom: 1px dotted #aaa; }
+  .season-summary tr:last-child { border-bottom: none; }
+  .season-summary td, #in-progress td { display: inline-block; vertical-align: middle; border: none; padding: .15em .4em; text-align: center !important; }
+  .season-summary tr td:first-child, #in-progress tr td:first-child { display: block; font-weight: bold; }
+  .season-summary tbody th { display: block; }
+  .season-summary .burgee-img { display: inline-block; height: 28px; width: auto; }
+
+  .coming-regattas, .coming-regattas tbody { display: block; width: 100%; }
+  .coming-regattas tr { display: block; text-align: center; padding: .5em; border-bottom: 1px solid #ccc; }
+  .coming-regattas tr:last-child { border-bottom: none; }
+  .coming-regattas td { display: inline-block; padding: .1em .35em; text-align: center !important; }
+  .coming-regattas tr td:first-child { display: block; font-weight: bold; }
+
+  /* Wide tables scroll inside their block rather than the page. */
+  .chart-container, .port.wide > table, .port > table.scoring-table, .port > table.teamranking, .port > table.sailors { display: block; overflow-x: auto; max-width: 100%; }
+  .teamscorelist .burgee-col, .scoring-table .burgee-col { padding: 0; }
+  .teamscorelist .burgee-col .burgee-img, .scoring-table .burgee-col .burgee-img { display: none; }
+  .scoring-table .opt { display: none; }
+  .scoring-table td.btns { white-space: normal; }
+  button.small { margin: .1em; }
+
+  .field { grid-template-columns: 1fr; }
+  .field > label { text-align: left; }
+  .field > span:empty { display: none; }
+  #team-filter-wrap select { min-width: 0; }
+  .left-fill, .right-fill { display: none; }
+  .burgee-cell .burgee-img { height: 28px; }
+}
+
+@media print {
+  body, #page-footer { background: none; }
+  #page-header, #submenu-wrapper, #welcome, .form-box, button { display: none; }
+  #page-content { padding-top: 1.5em; }
 }

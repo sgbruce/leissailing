@@ -8,6 +8,7 @@ const {
 } = fsSdk;
 
 export { configured };
+export const demo = false;
 
 const withId = (snap) => ({ id: snap.id, ...snap.data() });
 export const usernameOf = (user) => (user?.email || "").split("@")[0];
@@ -129,4 +130,11 @@ export function setResult(eventId, raceId, winner, me) {
 
 export function deleteRace(eventId, raceId) {
   return deleteDoc(doc(db, "events", eventId, "races", raceId));
+}
+
+// A small summary of the event's results (team count, races scored, leader),
+// kept on the event itself so the home and season pages can show status
+// without reading every event's races.
+export function updateSummary(eventId, summary) {
+  return updateDoc(doc(db, "events", eventId), { summary, updatedAt: serverTimestamp() });
 }
